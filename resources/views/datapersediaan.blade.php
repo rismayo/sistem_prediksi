@@ -33,7 +33,7 @@
                     <tbody>
                         @foreach ($pemakaians as $index => $pemakaian)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $pemakaians->firstItem() + $index }}</td>
                             <td>{{ $pemakaian->periode }}</td>
                             <td>{{ $pemakaian->obat->nama_obat }}</td>
                             <td>{{ $pemakaian->pemakaian }}</td>
@@ -87,6 +87,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                         </div>
                                     </div>

@@ -25,7 +25,7 @@
                             <th>No</th>
                             <th>Nama Obat</th>
                             <th>Satuan</th>
-                            <th>Aksi</th> <!-- Tambahkan kolom aksi -->
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,13 +36,12 @@
                             <td>{{ $obat->satuan }}</td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-3">
-                                    <!-- Tombol Edit -->
+                                    
                                     <a href="#" class="text-warning fs-5" title="Edit"
                                        data-bs-toggle="modal" data-bs-target="#editObatModal{{ $obat->id_obat }}">
                                         <i class="fas fa-pen"></i>
                                     </a>
                             
-                                    <!-- Tombol Hapus -->
                                     <a href="#" class="text-danger fs-5" title="Hapus"
                                        data-bs-toggle="modal" data-bs-target="#deleteModal{{ $obat->id_obat }}">
                                         <i class="fas fa-trash-alt"></i>
@@ -73,6 +72,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Apakah kamu yakin ingin menghapus <strong>{{ $obat->nama_obat }}</strong>?</p>
+                                            <p>Apakah kamu yakin ingin menghapus obat <strong>{{ $obat->nama_obat }}</strong>?</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

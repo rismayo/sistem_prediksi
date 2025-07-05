@@ -34,7 +34,7 @@
                     <i class="fas fa-spinner fa-spin me-2"></i>
                     <div>
                         <strong>Prediksi sedang diproses...</strong><br>
-                        Hasil akan muncul secara otomatis setelah selesai.
+                        Tunggu sebentar atau kembali beberapa saat, kemudian refresh halaman
                     </div>
                 </div>
             @endif

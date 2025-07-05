@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - UPT Puskesmas Jiwan</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -121,7 +120,6 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="main-container">
@@ -141,6 +139,13 @@
             <div class="login-box">
                 <h3>Selamat Datang!</h3>
 
+                @if ($errors->has('login_gagal'))
+                    <div class="alert alert-danger text-start">
+                        <i class="fas fa-exclamation-circle me-1"></i>
+                        {{ $errors->first('login_gagal') }}
+                    </div>
+                @endif
+
                 <form action="{{ route('proses_login') }}" method="POST">
                     {{ csrf_field() }}
 
@@ -151,7 +156,12 @@
 
                     <div class="mb-3 text-start">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
+                            <span class="input-group-text" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                                <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                            </span>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-login">LOG IN</button>
@@ -160,9 +170,24 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<script>
+function togglePasswordVisibility() {
+    const passwordField = document.getElementById("password");
+    const icon = document.getElementById("togglePasswordIcon");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+</script>
 
 </html>
