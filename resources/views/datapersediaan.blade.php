@@ -27,7 +27,7 @@
                             <th>Periode</th>
                             <th>Nama Obat</th>
                             <th>Pemakaian</th>
-                            <th>Aksi</th> <!-- Tambahkan kolom aksi -->
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,13 +39,11 @@
                             <td>{{ $pemakaian->pemakaian }}</td>
                             <td>
                                 <div class="d-flex justify-content-center gap-3">
-                                    <!-- Tombol Edit -->
                                     <a href="#" class="text-warning fs-5" title="Edit"
                                        data-bs-toggle="modal" data-bs-target="#editPersediaanModal{{ $pemakaian->id_pemakaian }}">
                                         <i class="fas fa-pen"></i>
                                     </a>
                         
-                                    <!-- Tombol Hapus -->
                                     <a href="#" class="text-danger fs-5" title="Hapus"
                                        data-bs-toggle="modal" data-bs-target="#deletePersediaanModal{{ $pemakaian->id_pemakaian }}">
                                         <i class="fas fa-trash-alt"></i>
@@ -54,7 +52,7 @@
                             </td>
                         </tr>
                         
-                        <!-- Modal Edit Persediaan -->
+                        <!-- Modal Edit -->
                         <div class="modal fade" id="editPersediaanModal{{ $pemakaian->id_pemakaian }}" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form action="{{ route('pemakaian.update', $pemakaian->id_pemakaian) }}" method="POST">
@@ -95,7 +93,7 @@
                             </div>
                         </div>
                         
-                        <!-- Modal Konfirmasi Hapus Persediaan -->
+                        <!-- Modal Hapus -->
                         <div class="modal fade" id="deletePersediaanModal{{ $pemakaian->id_pemakaian }}" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -133,7 +131,7 @@
     </div>
 </div>
 
-<!-- Modal untuk Tambah Data -->
+<!-- Modal Tambah Data -->
 <div class="modal fade" id="addPersediaanModal" tabindex="-1" aria-labelledby="addPersediaanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -142,15 +140,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Form untuk menambah data -->
                 <form action="{{ route('pemakaian.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- Kolom kiri untuk input -->
                             <div class="mb-3">
                                 <label for="periode" class="form-label">Periode</label>
-                                <!-- Input bulan dan tahun -->
                                 <input type="month" class="form-control" id="periode" name="periode" required>
                             </div>
                             <select class="form-select" id="id_obat" name="id_obat" required>
@@ -160,7 +155,6 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <!-- Kolom kanan untuk input -->
                             <div class="mb-3">
                                 <label for="pemakaian" class="form-label">Pemakaian</label>
                                 <input type="number" class="form-control" id="pemakaian" name="pemakaian" placeholder="Masukkan pemakaian" required>

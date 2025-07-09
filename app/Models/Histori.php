@@ -25,4 +25,11 @@ class Histori extends Model
     {
         return $this->belongsTo(Obat::class, 'id_obat', 'id_obat');
     }
+
+    public static function getHistoriPaginated($perPage = 10)
+    {
+        return self::with('obat')
+                ->orderBy('waktu_prediksi', 'desc')
+                ->paginate($perPage);
+    }
 }

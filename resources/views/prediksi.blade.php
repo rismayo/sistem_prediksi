@@ -125,7 +125,6 @@
                     </div>
                 </div>
 
-                <!-- Script untuk Chart per Obat -->
                 <script data-chart-data>
                     @foreach ($obatTerpilih as $index => $namaObat)
                         const ctx{{ $index }} = document.getElementById('chartObat{{ $index }}');

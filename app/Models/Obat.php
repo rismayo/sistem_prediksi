@@ -27,5 +27,34 @@ class Obat extends Model
     {
         return $this->hasMany(Pemakaian::class, 'id_obat', 'id_obat');
     }
+    // mengatur paginasi pada tampilan table obat
+    public static function getAllPaginated($perPage = 10)
+    {
+        return self::orderBy('nama_obat')->paginate($perPage);
+    }
 
+    public static function addObat(array $data)
+    {
+        return self::create($data);
+    }
+
+    public static function updateObat($id_obat, array $data)
+    {
+        $obat = self::findOrFail($id_obat);
+        $obat->update($data);
+        return $obat;
+    }
+
+    public static function deleteObat($id_obat)
+    {
+        $obat = self::findOrFail($id_obat);
+        return $obat->delete();
+    }
+    // jika pilih 'all' maka ambil semua obat, jika tidak maka ambil obat yang dipilih saja. 
+    public static function getSelectedObats(array $id_obat)
+    {
+        return in_array('all', $id_obat)
+            ? self::all()
+            : self::whereIn('id_obat', $id_obat)->get();
+    }
 }

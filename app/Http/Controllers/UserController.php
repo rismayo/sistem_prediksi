@@ -24,13 +24,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        User::create([
-            'nama' => $request->nama,
-            'username' => $request->username,
-            'email' => $request->email,
-            'level' => $request->level,
-            'password' => Hash::make($request->password),
-        ]);
+        User::createUser($request);
 
         return redirect()->back()->with('success', 'Pengguna berhasil ditambahkan.');
     }
@@ -46,17 +40,8 @@ class UserController extends Controller
             'level' => 'required|in:superadmin,admin',
             'password' => 'nullable|string|min:6',
         ]);
-
-        $user->nama = $request->nama;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->level = $request->level;
-
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
-        $user->save();
+        
+        $user->updateUser($request);
 
         return redirect()->back()->with('success', 'Data pengguna berhasil diperbarui.');
     }
@@ -64,7 +49,7 @@ class UserController extends Controller
     public function destroy($id_user)
     {
         $user = User::findOrFail($id_user);
-        $user->delete();
+        $user->deleteUser();
 
         return redirect()->back()->with('success', 'Pengguna berhasil dihapus.');
     }
@@ -76,8 +61,7 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id_user);
-        $user->password = Hash::make($request->password);
-        $user->save();
+        $user->updateUserPassword($request->password);
 
         return redirect()->route('datauser')->with('success', 'Password berhasil diperbarui.');
     }

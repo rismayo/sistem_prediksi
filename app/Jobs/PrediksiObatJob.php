@@ -38,13 +38,16 @@ class PrediksiObatJob implements ShouldQueue
      */
     public function handle()
     {
+        // loop melalui semua obat yang perlu diprediksi
         foreach ($this->obats as $obat) {
+            // kirim HTTP POST ke API Flask berupa nama obat dan periode
             $response = Http::post('http://localhost:5000/predict', [
                 'id_obat' => $obat->nama_obat,
                 'periode_prediksi' => $this->periode
             ]);
-
+            // jika response sukses maka simpan data hasil prediksi ke database
             if ($response->successful()) {
+                // mengubah hasil prediksi dari json ke array
                 $hasil_prediksi = $response->json();
 
                 foreach ($hasil_prediksi as $hasil) {

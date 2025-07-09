@@ -87,13 +87,17 @@
                                                     <div class="mb-3">
                                                         <label>Level</label>
                                                         <select name="level" class="form-select" required>
-                                                            <option value="Superadmin" {{ $user->level === 'superadmin' ? 'selected' : '' }}>Superadmin</option>
-                                                            <option value="Admin" {{ $user->level === 'admin' ? 'selected' : '' }}>Admin</option>
+                                                            <option value="superadmin" {{ $user->level === 'superadmin' ? 'selected' : '' }}>Superadmin</option>
+                                                            <option value="admin" {{ $user->level === 'admin' ? 'selected' : '' }}>Admin</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Password (biarkan kosong jika tidak diubah)</label>
-                                                        <input type="text" name="password" class="form-control" placeholder="Password baru (opsional)">
+                                                        <input type="text" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password minimal 6 karakter">
+                                                            @error('password')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                            <input type="hidden" name="_modal" value="editPenggunaModal{{ $user->id_user }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,7 +154,11 @@
 
                                             <div class="mb-3">
                                                 <label>Password Baru</label>
-                                                <input type="password" name="password" class="form-control" placeholder="Masukkan password baru" required>
+                                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan password baru dengan minimal 6 karakter" required>
+                                                    @error('password')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="hidden" name="_modal" value="ubahPasswordModal{{ $user->id_user }}">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -170,7 +178,7 @@
 
 <!-- Modal untuk Tambah Data -->
 <div class="modal fade" id="addPenggunaModal" tabindex="-1" aria-labelledby="addPenggunaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- pakai modal-lg biar agak lebar -->
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addPenggunaModalLabel">Tambah Data Pengguna</h5>
@@ -204,7 +212,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
+                                <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukkan password dengan minimal 6 karakter" required>
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <input type="hidden" name="_modal" value="add">
                             </div>
                         </div>
                     </div>
@@ -219,5 +231,16 @@
 </div>
 
 @if (!isset($noLayout))
+@if ($errors->any() && old('_modal'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modalId = '{{ old("_modal") }}';
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                new bootstrap.Modal(modal).show();
+            }
+        });
+    </script>
+@endif
     @endsection
 @endif

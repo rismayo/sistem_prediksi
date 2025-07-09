@@ -117,7 +117,7 @@
     </div>
 </div>
 
-<!-- Modal untuk Tambah Data -->
+<!-- Modal Tambah Data -->
 <div class="modal fade" id="addObatModal" tabindex="-1" aria-labelledby="addObatModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -126,7 +126,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Form untuk menambah data -->
                 <form action="{{ route('obat.store')}}" method="POST">
                     @csrf
                     <div class="row">

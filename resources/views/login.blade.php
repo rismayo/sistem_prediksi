@@ -106,7 +106,6 @@
             background: linear-gradient(90deg, #0049ff, #00aaff);
         }
 
-        /* Responsif untuk layar kecil */
         @media (max-width: 768px) {
             .content-container {
                 flex-direction: column;
@@ -123,19 +122,16 @@
 <body>
 
     <div class="main-container">
-        <!-- Judul di tengah layar -->
         <div class="title-container">
             <h3>UPT PUSKESMAS JIWAN</h3>
             <p>Prediksi Persediaan Obat</p>
         </div>
 
         <div class="content-container">
-            <!-- Gambar besar -->
             <div class="logo-container">
                 <img src="{{ asset('image/logo.png') }}" alt="Logo Puskesmas">
             </div>
 
-            <!-- Kotak Login -->
             <div class="login-box">
                 <h3>Selamat Datang!</h3>
 
